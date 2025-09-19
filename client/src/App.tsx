@@ -1,14 +1,39 @@
-import * as React from 'react';
-import { Button } from '@/components/ui/button';
 
-// Extract the error message
+import * as React from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import { useAuth } from './contexts/AuthContext';
+import Layout from './components/Layout';
+import LandingPage from './pages/LandingPage';
+import RegisterPage from './pages/RegisterPage';
+import LoginPage from './pages/LoginPage';
+import HomePage from './pages/HomePage';
+
 function App() {
+  const { isAuthenticated, isLoading } = useAuth();
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
   return (
-    <div className="min-h-screen">
-      <div className="container mx-auto px-4 py-8">
-        <h1 className="text-4xl font-bold">Instance starter</h1>
-      </div>
-    </div>
+    <Layout>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            isAuthenticated ? <HomePage /> : <LandingPage />
+          }
+        />
+        <Route
+          path="/login"
+          element={isAuthenticated ? <Navigate to="/" /> : <LoginPage />}
+        />
+        <Route
+          path="/register"
+          element={isAuthenticated ? <Navigate to="/" /> : <RegisterPage />}
+        />
+      </Routes>
+    </Layout>
   );
 }
 

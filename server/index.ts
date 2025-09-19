@@ -1,6 +1,9 @@
+
 import express from 'express';
 import dotenv from 'dotenv';
+import cookieParser from 'cookie-parser';
 import { setupStaticServing } from './static-serve.js';
+import authRouter from './features/auth/auth.router';
 
 dotenv.config();
 
@@ -9,11 +12,10 @@ const app = express();
 // Body parsing middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
-// example endpoint
-// app.get('/api/hello', (req: express.Request, res: express.Response) => {
-//   res.json({ message: 'Hello World!' });
-// });
+// API routes
+app.use('/api/auth', authRouter);
 
 // Export a function to start the server
 export async function startServer(port) {

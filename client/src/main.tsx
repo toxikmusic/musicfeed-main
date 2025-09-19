@@ -1,6 +1,9 @@
+
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
 import App from './App';
+import { AuthProvider } from './contexts/AuthContext';
 
 import './index.css';
 
@@ -16,6 +19,10 @@ darkQuery.addEventListener('change', updateDarkClass);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <App />
+    <BrowserRouter>
+      <AuthProvider>
+        <App />
+      </AuthProvider>
+    </BrowserRouter>
   </React.StrictMode>,
 );
