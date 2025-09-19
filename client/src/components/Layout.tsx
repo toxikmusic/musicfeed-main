@@ -25,9 +25,13 @@ export default function Layout({ children }: LayoutProps) {
             AudiusClone
           </Link>
           <nav>
-            {isAuthenticated ? (
+            {isAuthenticated && user ? (
               <div className="flex items-center gap-4">
-                <span>Welcome, {user?.username}</span>
+                <Button asChild variant="link">
+                  <Link to={`/profile/${user.username}`}>
+                    Welcome, {user.username}
+                  </Link>
+                </Button>
                 <Button onClick={handleLogout}>Logout</Button>
               </div>
             ) : (

@@ -7,6 +7,7 @@ import LandingPage from './pages/LandingPage';
 import RegisterPage from './pages/RegisterPage';
 import LoginPage from './pages/LoginPage';
 import HomePage from './pages/HomePage';
+import ProfilePage from './pages/ProfilePage';
 
 function App() {
   const { isAuthenticated, isLoading } = useAuth();
@@ -32,6 +33,7 @@ function App() {
           path="/register"
           element={isAuthenticated ? <Navigate to="/" /> : <RegisterPage />}
         />
+        <Route path="/profile/:username" element={<ProfilePage />} />
       </Routes>
     </Layout>
   );

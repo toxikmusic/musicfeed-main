@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
 import { setupStaticServing } from './static-serve.js';
 import authRouter from './features/auth/auth.router';
+import usersRouter from './features/users/users.router';
 
 dotenv.config();
 
@@ -16,6 +17,7 @@ app.use(cookieParser());
 
 // API routes
 app.use('/api/auth', authRouter);
+app.use('/api/users', usersRouter);
 
 // Export a function to start the server
 export async function startServer(port) {

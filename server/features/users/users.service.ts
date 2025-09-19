@@ -18,3 +18,11 @@ export async function findUserByUsername(username: string) {
     .where('username', '=', username)
     .executeTakeFirst();
 }
+
+export async function findPublicUserByUsername(username: string) {
+  return await db
+    .selectFrom('users')
+    .select(['id', 'username', 'created_at'])
+    .where('username', '=', username)
+    .executeTakeFirst();
+}
