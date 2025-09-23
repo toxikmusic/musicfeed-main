@@ -2,9 +2,11 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
+import path from 'path';
 import { setupStaticServing } from './static-serve.js';
 import authRouter from './features/auth/auth.router';
 import usersRouter from './features/users/users.router';
+import tracksRouter from './features/tracks/tracks.router';
 
 dotenv.config();
 
@@ -15,9 +17,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
+// Serve uploaded files
+const uploadsDir = path.join(process.env.DATA_DIRECTORY || 'data', 'uploads');
+app.use('/uploads', express.static(uploadsDir));
+
 // API routes
 app.use('/api/auth', authRouter);
 app.use('/api/users', usersRouter);
+app.use('/api/tracks', tracksRouter);
 
 // Export a function to start the server
 export async function startServer(port) {
