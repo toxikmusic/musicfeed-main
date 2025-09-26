@@ -84,7 +84,7 @@ export default function UploadTrackForm({
             <Input
               id="track-file"
               type="file"
-              accept="audio/*"
+              accept="audio/*/.mp3"
               onChange={handleFileChange}
               required
             />
