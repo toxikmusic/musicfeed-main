@@ -84,7 +84,7 @@ export default function UploadTrackForm({
             <Input
               id="track-file"
               type="file"
-              accept="mp3/wav/aiff"
+              accept=".mp3/.wav/.aiff"
               onChange={handleFileChange}
               required
             />
